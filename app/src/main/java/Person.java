@@ -12,7 +12,7 @@ public class Person {
     private  double weight;
     private HashMap interests;
     private boolean allergy;
-    private Goal goal;
+    private Goals goals;
 
 
     public Person(){
@@ -32,8 +32,8 @@ public class Person {
         return weight;
     }
 
-    public Goal getGoal() {
-        return goal;
+    public Goals getGoals() {
+        return goals;
     }
 
     public HashMap getInterests() {
@@ -52,8 +52,8 @@ public class Person {
         this.gender = gender;
     }
 
-    public void setGoal(Goal goal) {
-        this.goal = goal;
+    public void setGoals(Goals goals) {
+        this.goals = goals;
     }
 
     public void setHeight(double height) {
