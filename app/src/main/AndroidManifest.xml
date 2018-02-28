@@ -18,7 +18,7 @@
         //API key for Google Play Services
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDy0fndFo8Y2qQQjFS6i9u895eISLxCIs8"/>
+            android:value="AIzaSyCGbc8Y2v9zEA_cR1B4RU7sEXeBt_ZZloA"/>
 
         <activity
             android:name=".MainActivity"
