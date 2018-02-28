@@ -27,7 +27,13 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.INTERNET;
+
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,13 +44,17 @@ public class MainActivity extends AppCompatActivity {
     PieChart pieChart;
 
     //GPS Google Instance Variables
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final int RESULT_PERMS_INITIAL=1339;
+    private GoogleApiReceiver googleApiReceiver;
+    private static final String[] PERMISSIONS={
+            ACCESS_FINE_LOCATION,
+            ACCESS_COARSE_LOCATION,
+            INTERNET
+    };
 
-    private Boolean mLocationPermissionsGranted = false;
-    private Location currentLocation;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
+    //private Boolean mLocationPermissionsGranted = false;
+    //private Location currentLocation;
+    //private FusedLocationProviderClient mFusedLocationProviderClient;
 
 
     @Override
@@ -62,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setDrawEntryLabels(true);
 
         addDataSet();
-        getLocationPermission();
-        getDeviceLocation();
+        init();
+        //getLocationPermission();
+        //getDeviceLocation();
 
 
 
@@ -120,8 +131,42 @@ public class MainActivity extends AppCompatActivity {
         pieChart.invalidate();
 
     }
+
+    public void init() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+      requestPermissions(); // Android 6.0 + (runtime permission)
+    else
+      startGoogleApi();
+
+    }
+    public void startGoogleApi() {
+
+        googleApiReceiver = new GoogleApiReceiver(this);
+
+    }
+    public void requestPermissions() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            List<String> permission_list = new ArrayList<>();
+
+            for(int i = 0; i < PERMISSIONS.length; i++) {
+                if(ContextCompat.checkSelfPermission(this,PERMISSIONS[i]) == -1)
+                    permission_list.add(PERMISSIONS[i]);
+            }
+
+            if(permission_list.size() == 0) {
+                startGoogleApi();
+            } else {
+                String[] NEW_PERMISSIONS = new String[permission_list.size()];
+                for(int i = 0; i < permission_list.size(); i ++)
+                    NEW_PERMISSIONS[i] = permission_list.get(i);
+
+                requestPermissions(NEW_PERMISSIONS, RESULT_PERMS_INITIAL);
+            }
+        }
+    }
+
     //get the location permission before using the GPS
-    private void getLocationPermission(){
+    /*private void getLocationPermission(){
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -174,6 +219,9 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
         }
     }
+    */
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
