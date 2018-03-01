@@ -1,3 +1,7 @@
+package Classes;
+
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.*;
@@ -5,6 +9,8 @@ import com.android.volley.*;
 import com.android.volley.toolbox.*;
 
 import org.json.JSONObject;
+
+import static java.lang.System.*;
 
 /**
  * Call to API to get conditions (Location, Weather, and Pollen)
@@ -26,15 +32,21 @@ public class CurrentCondition {
                    public void onResponse(String response) {
                        // Display the first 500 characters of the response string.
                        String getResponse = response;
-                       System.out.println(getResponse);
+                       Log.e(TAG, "getResponse" + getResponse);
+                       System.err.println("hejjklslkjl");
                    }
                }, new Response.ErrorListener() {
            @Override
            public void onErrorResponse(VolleyError error) {
                error.printStackTrace();
+               Log.e(TAG, "Error");
            }
-             });
-
+                 });
        return a;
     }
-}
+
+    public void main(String[] args) {
+        // create an instance
+        callAPI("");
+    }
+};
