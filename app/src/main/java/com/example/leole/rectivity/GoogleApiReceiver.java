@@ -59,6 +59,8 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
     protected GoogleApiClient mGoogleApiClient;
     protected Location mLastLocation;
 
+    public double newLatitude;
+    public double newLongtitude;
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
@@ -178,7 +180,10 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
     public void onLocationChanged(Location location) {
 
         Log.e(TAG, "onLocationChanged: " + location);
-        getPlaceInfo();
+        newLatitude = location.getLatitude();
+        newLongtitude = location.getLongitude();
+
+       // getPlaceInfo();
 
     }
 
