@@ -36,4 +36,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+            //for pi charting
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    //for Google Play Location
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
+    implementation 'com.google.android.gms:play-services-places:11.8.0'
 }
