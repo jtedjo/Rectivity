@@ -89,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setTransparentCircleAlpha(0);
         pieChart.setDrawEntryLabels(true);
 
-//        addDataSet();
+        addDataSet();
         init();
         Context context = getApplicationContext();
-        CurrentCondition currentCond = new CurrentCondition();
-        currentCond.ApiCall(context);
-        //getLocationPermission();
-        //getDeviceLocation();
+        CurrentCondition currentCond = new CurrentCondition(context);
+        currentCond.ApiCall();
+//        getLocationPermission();
+//        getDeviceLocation();
 
 
 

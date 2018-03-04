@@ -20,27 +20,36 @@ import com.example.leole.rectivity.R;
  */
 
 public class CurrentCondition {
+    private Context context;
+
+    public CurrentCondition(Context c ){
+        this.context = c;
+    };
+
     private String TAG = "BaseActivity";
-
-   public CurrentCondition(){};
-
-
-    public void ApiCall(Context context){
-
+    private double lat = 33.7486097;
+    private double lon = -117.9776172;
+    private String breezeURL  = "https://api.breezometer.com/baqi/?lat=" +lat+"&lon="+lon+"&key=" + "b9023667dc3046d1ad00d71dc2772793";// R.string.breezoMeterKeys;
+//    private String weatherURL =  "http://api.wunderground.com/api/" + R.string(R.string.weatherAPIKey) + "/geolookup/q/37.776289,-122.395234.json";
+    //TODO refactor to generalize for all API calls
+    public void ApiCall(){
+        Log.i("APICall Checking breezekeys", String.valueOf(R.string.breezoMeterKeys));
         RequestQueue queue = Volley.newRequestQueue(context);
         Log.i("API", "Call");
-        String url = "http://api.wunderground.com/api/" + context.getResources().getString(R.string.weatherAPIKey) + "/geolookup/q/37.776289,-122.395234.json";
-
+        String url = breezeURL;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>()
+                    new Response.Listener<String>()
                 {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            JSONObject jsonRes = new JSONObject(response);
-                            JSONObject jsonArray = new JSONObject(jsonRes.getString("current_observation"));
-                            Log.i("getting Condition", jsonArray.getString("weather"));
-                        } catch (JSONException e) {e.printStackTrace();};
+                        //Testing breeze Connection;
+                        Log.i("Breeze", response);
+                        //process  Weather Json
+//                        try {
+//                           JSONObject jsonRes  = (new JSONObject(response)).getString("current_observation").toString();
+//                           //Need to get weather jsonRes.getString("weather");
+//                            Log.i("getting Condition",jsonRes);
+//                        } catch (JSONException e) {e.printStackTrace();};
                     }
                 },
                 new Response.ErrorListener()
@@ -57,4 +66,7 @@ public class CurrentCondition {
 
         return ;
     }
+
+
+
 };
