@@ -10,8 +10,6 @@ import Classes.CurrentCondition;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-    CurrentCondition nes = new CurrentCondition();
-    nes.callAPI("");
-    System.out.println();
+
     }
 }

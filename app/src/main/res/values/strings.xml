@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Rectivity</string>
     <string name="action_settings">Settings</string>
-    <string name="weatherAPIKey"> e3683e271666b131</string>
-    <string name="breezoMeterKeys"> b9023667dc3046d1ad00d71dc2772793</string>
+    <string name="darkSkyKey"> b192801dd32b4790057b73cec3fa551f</string>
+    <string name="breezoMeterKey"> b9023667dc3046d1ad00d71dc2772793</string>
     <string name="googlePlaceKeys"> AIzaSyDy0fndFo8Y2qQQjFS6i9u895eISLxCIs8</string>
     <string name="rectivity">Rectivity</string>
     <string name="textview">TextView</string>

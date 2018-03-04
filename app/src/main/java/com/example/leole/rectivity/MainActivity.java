@@ -1,5 +1,6 @@
 package com.example.leole.rectivity;
 
+import android.support.v4.content.LocalBroadcastManager;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -28,12 +30,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -91,12 +87,14 @@ public class MainActivity extends AppCompatActivity {
 
         addDataSet();
         init();
-        Context context = getApplicationContext();
-        CurrentCondition currentCond = new CurrentCondition(context);
-        currentCond.ApiCall();
+
 //        getLocationPermission();
 //        getDeviceLocation();
 
+        Intent intent = new Intent();
+        intent.setAction("com.example.broadcast.MY_NOTIFICATION");
+        intent.putExtra("data","Notice me senpai!");
+        sendBroadcast(intent);
 
 
         //double currentLat = currentLocation.getAltitude();
@@ -105,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
         //EditText eText;
         //eText = (EditText) findViewById(R.id.editText);
         //eText.setText((String.valueOf(currentLat)));
+
+
+
+        double lat = 33.7486097;
+        double lon = -117.9776172;
+        Context context = getApplicationContext();
+        CurrentCondition currentCond = new CurrentCondition(context);
+        currentCond.getPollen(lat, lon);
     }
 
     /*Does not work currently
