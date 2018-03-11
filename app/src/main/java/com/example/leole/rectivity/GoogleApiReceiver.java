@@ -223,6 +223,8 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             Log.d("location", "location: " + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude());
+            newLongtitude = mLastLocation.getLongitude();
+            newLatitude = mLastLocation.getLatitude();
 
         } else {
             Log.d("location", "location empty");

@@ -66,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    //private Boolean mLocationPermissionsGranted = false;
-    //private Location currentLocation;
-    //private FusedLocationProviderClient mFusedLocationProviderClient;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,13 +92,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("data","Notice me senpai!");
         sendBroadcast(intent);
 
+        double latitude = googleApiReceiver.newLatitude;
 
-        //double currentLat = currentLocation.getAltitude();
-        //double currentLong = currentLocation.getLongitude();
 
-        //EditText eText;
-        //eText = (EditText) findViewById(R.id.editText);
-        //eText.setText((String.valueOf(currentLat)));
+
+        Toast.makeText(MainActivity.this,
+                "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
 
 
 
