@@ -1,52 +1,36 @@
 package com.example.leole.rectivity;
 
-import android.support.v4.content.LocalBroadcastManager;
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-import android.content.Intent;
+import android.view.View;
 
+import com.firebase.ui.auth.AuthUI;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import Classes.CurrentCondition;
+import Classes.PersonActivity;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.INTERNET;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Map;
-import java.util.HashMap;
-
-import Classes.CurrentCondition;
-
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,12 +53,21 @@ public class MainActivity extends AppCompatActivity {
     //private Boolean mLocationPermissionsGranted = false;
     //private Location currentLocation;
     //private FusedLocationProviderClient mFusedLocationProviderClient;
+    private static FirebaseDatabase mDatabase;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Context context = getApplicationContext();
+
+        //PersonActivity
+        PersonActivity personAct = new PersonActivity(context);
+        //TODO Do something with personActivity data
+
+        //Accessing Firebase
+//        initFireBase();
 
         //chart onCreate
         Log.d(TAG, "onCreate: starting to create Pie Chart");
@@ -106,11 +99,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        double lat = 33.7486097;
-        double lon = -117.9776172;
-        Context context = getApplicationContext();
-        CurrentCondition currentCond = new CurrentCondition(context);
-        currentCond.getPollen(lat, lon);
+//        double lat = 33.7486097;
+//        double lon = -117.9776172;
+//        CurrentCondition currentCond = new CurrentCondition(context);
+//        currentCond.getPollen(lat, lon);
     }
 
     /*Does not work currently
@@ -166,11 +158,13 @@ public class MainActivity extends AppCompatActivity {
       startGoogleApi();
 
     }
+
     public void startGoogleApi() {
 
         googleApiReceiver = new GoogleApiReceiver(this);
 
     }
+
     public void requestPermissions() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             List<String> permission_list = new ArrayList<>();
@@ -271,7 +265,17 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-//
+
+    private static final int RC_SIGN_IN = 123;
+
+    public void initFireBase() {
+        //TODO get firebase Connection
+        if (mDatabase == null) {
+            mDatabase = FirebaseDatabase.getInstance();
+            mDatabase.setPersistenceEnabled(true);
+        }
+    }
+
 //    public void ApiCall(){
 //
 //        RequestQueue queue = Volley.newRequestQueue(this);
