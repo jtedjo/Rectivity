@@ -22,15 +22,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import Classes.CurrentCondition;
+import Classes.Person;
 import Classes.PersonActivity;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.INTERNET;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
         Context context = getApplicationContext();
 
         //PersonActivity
-        PersonActivity personAct = new PersonActivity(context);
+//        PersonActivity personAct = new PersonActivity(context);
         //TODO Do something with personActivity data
 
         //Accessing Firebase
-//        initFireBase();
+        initFireBase();
 
         //chart onCreate
         Log.d(TAG, "onCreate: starting to create Pie Chart");
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         addDataSet();
         init();
-
+//
 //        getLocationPermission();
 //        getDeviceLocation();
 
@@ -90,8 +94,10 @@ public class MainActivity extends AppCompatActivity {
         sendBroadcast(intent);
 
 
-        //double currentLat = currentLocation.getAltitude();
-        //double currentLong = currentLocation.getLongitude();
+        Log.i("Current Lat", ""+googleApiReceiver.newLatitude);
+
+//        double currentLat = currentLocation.getAltitude();
+//        double currentLong = currentLocation.getLongitude();
 
         //EditText eText;
         //eText = (EditText) findViewById(R.id.editText);
@@ -187,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //get the location permission before using the GPS
-    /*private void getLocationPermission(){
+    /* private void getLocationPermission(){
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -270,12 +276,30 @@ public class MainActivity extends AppCompatActivity {
 
     public void initFireBase() {
         //TODO get firebase Connection
-        if (mDatabase == null) {
-            mDatabase = FirebaseDatabase.getInstance();
-            mDatabase.setPersistenceEnabled(true);
-        }
-    }
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("User").child("name");
+//        Person person = new Person();
+//        person.setAllergy(true);
+//        person.setName("H");
+//        person.setGender(0);
+//        person.setHeight(5.4);
 
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
 //    public void ApiCall(){
 //
 //        RequestQueue queue = Volley.newRequestQueue(this);
