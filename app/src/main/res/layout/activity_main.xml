@@ -33,7 +33,7 @@
         android:layout_marginEnd="41dp"
         android:layout_marginStart="19dp"
         android:layout_marginTop="300dp"
-        android:text="@string/button"
+        android:text="@string/running"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:layout_marginBottom="221dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="248dp"
-        android:text="@string/button"
+        android:text="@string/biking"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/textView1"
@@ -60,7 +60,7 @@
         android:layout_marginBottom="219dp"
         android:layout_marginEnd="19dp"
         android:layout_marginTop="300dp"
-        android:text="@string/button"
+        android:text="@string/swimming"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -129,4 +129,5 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.329"
         tools:text="Example 1" />
+
 </android.support.constraint.ConstraintLayout>
