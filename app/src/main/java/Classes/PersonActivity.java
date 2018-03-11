@@ -14,13 +14,16 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class PersonActivity {
     private Context context;
     public PersonActivity(Context cont){
         context = cont;
-        processPersonicle();
+        processSegment();
     }
 
     public void processPersonicle(){
@@ -93,6 +96,50 @@ public class PersonActivity {
         }
 
     };
+
+    private double[] processSegment() {
+
+        String json = loadJson();
+        double[] activityArray = new double[3];
+        try{
+            JSONObject jsonFile = new JSONObject(json);
+            JSONObject mainSegmentObj = jsonFile.getJSONObject("segment");
+            Log.i("SegmentObj Length: ", "" + mainSegmentObj.length());
+
+            Iterator segIter = mainSegmentObj.keys();
+            while(segIter.hasNext()) {
+                //Get day object
+                Object key = segIter.next();
+                JSONObject dayObject = mainSegmentObj.getJSONObject((String) key);
+
+
+                //Iteratee through day to get segments
+                Iterator dayIter = dayObject.keys();
+                while(dayIter.hasNext()) {
+                    Object dayKey = dayIter.next();
+                    JSONObject daySegmentObject = dayObject.getJSONObject((String) dayKey);
+                    JSONArray  activitySet = daySegmentObject.getJSONArray("activitySet");
+                    //bicycle
+                    activityArray[0] += Double.parseDouble(activitySet.getJSONObject(0).getString("bicycle"));
+                    //running
+                    activityArray[1] += Double.parseDouble(activitySet.getJSONObject(0).getString("running"));
+                    //walking
+                    activityArray[2] += Double.parseDouble(activitySet.getJSONObject(0).getString("walking"));
+                }
+
+            }
+            Log.i("Activity Array Bicycle", "" +activityArray[0]);
+            Log.i("Activity Array Running", "" +activityArray[1]);
+            Log.i("Activity Array Walking", "" +activityArray[2]);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return activityArray;
+    }
+
     private String loadJson() {
         String json;
 
