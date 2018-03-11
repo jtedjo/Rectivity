@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     //charting variables
     private static String TAG = "MainActivity";
     private float[] yData = {25.3f, 10.6f, 66.76f, 44.32f, 46.01f, 16.89f, 23.9f};
-    private String[] xData = {"Mitch", "Jessica", "Mohammad", "Kelsey", "Sam", "Robert", "Ashley"};
+    private String[] xData = {"Bicycle", "Running", "Walking"};
     PieChart pieChart;
 
     //GPS Google Instance Variables
@@ -50,14 +50,12 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-<<<<<<< HEAD
-=======
     //private Boolean mLocationPermissionsGranted = false;
     //private Location currentLocation;
     //private FusedLocationProviderClient mFusedLocationProviderClient;
     private static FirebaseDatabase mDatabase;
 
->>>>>>> 1e280b246b2dca9ab7f0ca77d76750d7f90e412a
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         //PersonActivity
         PersonActivity personAct = new PersonActivity(context);
         //TODO Do something with personActivity data
+        yData = personAct.processSegment();
 
         //Accessing Firebase
 //        initFireBase();
@@ -93,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
         sendBroadcast(intent);
 
         double latitude = googleApiReceiver.newLatitude;
+        Log.i("current latitude in Main", "" + latitude );
 
 
-
-        Toast.makeText(MainActivity.this,
-                "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this,
+         //       "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
 
 
 
@@ -126,19 +125,21 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<PieEntry> yEntrys = new ArrayList<>();
         ArrayList<String> xEntrys = new ArrayList<>();
 
-        for (int i = 0; i < yData.length; i++){
-            yEntrys.add(new PieEntry(yData[i], i));
-        }
+        //for (int i = 0; i < yData.length; i++){
+        //    yEntrys.add(new PieEntry(yData[i], i));
+        //}
+        yEntrys.add(new PieEntry(yData[0], "Biking"));
+        yEntrys.add(new PieEntry(yData[1], "Running"));
+        yEntrys.add(new PieEntry(yData[2], "Walking"));
         for (int i = 1; i < xData.length; i++){
             xEntrys.add(xData[i]);
         }
 
-        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Employee Sales");
+        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Activity Counter");
         pieDataSet.setSliceSpace(2);
         pieDataSet.setValueTextSize(12);
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GRAY);
         colors.add(Color.BLUE);
         colors.add(Color.RED);
         colors.add(Color.GREEN);

@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.content.Context;
+import android.app.Activity;
+import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -183,6 +186,9 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
         Log.e(TAG, "onLocationChanged: " + location);
         newLatitude = location.getLatitude();
         newLongtitude = location.getLongitude();
+        Log.i("new latitude is outputted", " " + newLatitude);
+        Intent intent = new Intent();
+        intent.setAction("LocationChangedRan"); mContext.sendBroadcast(intent);
 
        // getPlaceInfo();
 

@@ -97,10 +97,10 @@ public class PersonActivity {
 
     };
 
-    private double[] processSegment() {
+    public float[] processSegment() {
 
         String json = loadJson();
-        double[] activityArray = new double[3];
+        float[] activityArray = new float[3];
         try{
             JSONObject jsonFile = new JSONObject(json);
             JSONObject mainSegmentObj = jsonFile.getJSONObject("segment");
