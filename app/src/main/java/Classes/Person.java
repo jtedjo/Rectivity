@@ -1,5 +1,6 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -7,14 +8,16 @@ import java.util.HashMap;
  */
 
 
-public class Person {
+public class Person implements Serializable {
 
+    //Gender 0 = male 1 = Females
     private int gender;
     private double height;
     private  double weight;
-    private HashMap interests;
+    private HashMap interests = new HashMap();
     private boolean allergy;
     private Goals goals;
+    private String name;
 
 
     public Person(){
@@ -34,6 +37,12 @@ public class Person {
         return weight;
     }
 
+    public void setName(String n) {
+        name = n;
+    };
+    public String getName(){
+        return name;
+    }
     public Goals getGoals() {
         return goals;
     }

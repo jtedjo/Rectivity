@@ -124,6 +124,7 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -191,6 +192,9 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
         intent.setAction("LocationChangedRan"); mContext.sendBroadcast(intent);
 
        // getPlaceInfo();
+        Log.i("Lat in API", ""+newLatitude);
+        Log.i("Long in API", ""+newLongtitude);
+        // getPlaceInfo();
 
     }
 
