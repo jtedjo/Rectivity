@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "834290870492",
+    "firebase_url": "https://rectivity-8d02a.firebaseio.com",
+    "project_id": "rectivity-8d02a",
+    "storage_bucket": "rectivity-8d02a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834290870492:android:4807598539fbbde9",
+        "android_client_info": {
+          "package_name": "com.example.leole.rectivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834290870492-t5jb6iragjeq9h191lg0h6e06qmp1nqs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.leole.rectivity",
+            "certificate_hash": "a7468cce24d7a5c4206fc93e8587fa2f62bf6c28"
+          }
+        },
+        {
+          "client_id": "834290870492-i3e5trnc68fl81hgk04c0d6m2fcsuekl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvqqcTWuMlyDOE2xrOLbJVkiOv_sffBOU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834290870492-i3e5trnc68fl81hgk04c0d6m2fcsuekl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

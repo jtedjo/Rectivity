@@ -1,61 +1,54 @@
 package com.example.leole.rectivity;
 
-import android.support.v4.content.LocalBroadcastManager;
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.content.Intent;
 
+import android.view.View;
+
+
+import com.firebase.ui.auth.AuthUI;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import Classes.CurrentCondition;
+import Classes.Person;
+import Classes.PersonActivity;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.INTERNET;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Map;
-import java.util.HashMap;
-
-import Classes.CurrentCondition;
-
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     //charting variables
     private static String TAG = "MainActivity";
     private float[] yData = {25.3f, 10.6f, 66.76f, 44.32f, 46.01f, 16.89f, 23.9f};
-    private String[] xData = {"Mitch", "Jessica", "Mohammad", "Kelsey", "Sam", "Robert", "Ashley"};
+    private String[] xData = {"Bicycle", "Running", "Walking"};
     PieChart pieChart;
 
     //GPS Google Instance Variables
@@ -71,12 +64,23 @@ public class MainActivity extends AppCompatActivity {
     //private Boolean mLocationPermissionsGranted = false;
     //private Location currentLocation;
     //private FusedLocationProviderClient mFusedLocationProviderClient;
+    private static FirebaseDatabase mDatabase;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Context context = getApplicationContext();
+
+        //PersonActivity
+//        PersonActivity personAct = new PersonActivity(context);
+        //TODO Do something with personActivity data
+        yData = personAct.processSegment();
+
+        //Accessing Firebase
+        initFireBase();
 
         Spinner dropdown1 = findViewById(R.id.favorite_spinner1);
         Spinner dropdown2 = findViewById(R.id.favorite_spinner2);
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         addDataSet();
         init();
-
+//
 //        getLocationPermission();
 //        getDeviceLocation();
 
@@ -109,21 +113,23 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("data","Notice me senpai!");
         sendBroadcast(intent);
 
+        double latitude = googleApiReceiver.newLatitude;
+        Log.i("current latitude in Main", "" + latitude );
 
-        //double currentLat = currentLocation.getAltitude();
-        //double currentLong = currentLocation.getLongitude();
+        Log.i("Current Lat", ""+googleApiReceiver.newLatitude);
 
-        //EditText eText;
-        //eText = (EditText) findViewById(R.id.editText);
-        //eText.setText((String.valueOf(currentLat)));
+//        double currentLat = currentLocation.getAltitude();
+//        double currentLong = currentLocation.getLongitude();
+
+        //Toast.makeText(MainActivity.this,
+         //       "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
 
 
 
-        double lat = 33.7486097;
-        double lon = -117.9776172;
-        Context context = getApplicationContext();
-        CurrentCondition currentCond = new CurrentCondition(context);
-        currentCond.getPollen(lat, lon);
+//        double lat = 33.7486097;
+//        double lon = -117.9776172;
+//        CurrentCondition currentCond = new CurrentCondition(context);
+//        currentCond.getPollen(lat, lon);
     }
 
     /*Does not work currently
@@ -145,19 +151,21 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<PieEntry> yEntrys = new ArrayList<>();
         ArrayList<String> xEntrys = new ArrayList<>();
 
-        for (int i = 0; i < yData.length; i++){
-            yEntrys.add(new PieEntry(yData[i], i));
-        }
+        //for (int i = 0; i < yData.length; i++){
+        //    yEntrys.add(new PieEntry(yData[i], i));
+        //}
+        yEntrys.add(new PieEntry(yData[0], "Biking"));
+        yEntrys.add(new PieEntry(yData[1], "Running"));
+        yEntrys.add(new PieEntry(yData[2], "Walking"));
         for (int i = 1; i < xData.length; i++){
             xEntrys.add(xData[i]);
         }
 
-        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Employee Sales");
+        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Activity Counter");
         pieDataSet.setSliceSpace(2);
         pieDataSet.setValueTextSize(12);
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GRAY);
         colors.add(Color.BLUE);
         colors.add(Color.RED);
         colors.add(Color.GREEN);
@@ -179,11 +187,13 @@ public class MainActivity extends AppCompatActivity {
       startGoogleApi();
 
     }
+
     public void startGoogleApi() {
 
         googleApiReceiver = new GoogleApiReceiver(this);
 
     }
+
     public void requestPermissions() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             List<String> permission_list = new ArrayList<>();
@@ -206,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //get the location permission before using the GPS
-    /*private void getLocationPermission(){
+    /* private void getLocationPermission(){
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -284,7 +294,35 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-//
+
+    private static final int RC_SIGN_IN = 123;
+
+    public void initFireBase() {
+        //TODO get firebase Connection
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("User").child("name");
+//        Person person = new Person();
+//        person.setAllergy(true);
+//        person.setName("H");
+//        person.setGender(0);
+//        person.setHeight(5.4);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
 //    public void ApiCall(){
 //
 //        RequestQueue queue = Volley.newRequestQueue(this);
