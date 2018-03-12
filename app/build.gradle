@@ -57,3 +57,9 @@ dependencies {
 dependencies {
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
 }
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}

@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Accessing Firebase
         initFireBase();
-
 //        Spinner dropdown1 = findViewById(R.id.favorite_spinner1);
 //        Spinner dropdown2 = findViewById(R.id.favorite_spinner2);
 //        Spinner dropdown3 = findViewById(R.id.favorite_spinner3);
@@ -95,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 //        dropdown1.setAdapter(adapter);
 //        dropdown2.setAdapter(adapter);
 //        dropdown3.setAdapter(adapter);
+
 
         //chart onCreate
         Log.d(TAG, "onCreate: starting to create Pie Chart");
