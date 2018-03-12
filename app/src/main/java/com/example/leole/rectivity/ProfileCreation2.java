@@ -1,5 +1,6 @@
 package com.example.leole.rectivity;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ public class ProfileCreation2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_creation2);
+        Context context = getApplicationContext();
 
         Spinner dropdown1 = findViewById(R.id.favorite_spinner1);
         Spinner dropdown2 = findViewById(R.id.favorite_spinner2);
