@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.github.mikephil.charting.charts.PieChart;
@@ -95,6 +98,19 @@ public class MainActivity extends AppCompatActivity {
         Log.i("current latitude in Main", "" + latitude );
 
 
+        //UI Modification for Activity Main
+        Button p1_button = (Button)findViewById(R.id.button1);
+        p1_button.setText("Running");
+        Button p2_button = (Button)findViewById(R.id.button2);
+        p2_button.setText("Biking");
+        Button p3_button = (Button)findViewById(R.id.button3);
+        p3_button.setText("Swimming");
+        TextView homeText = (TextView) findViewById(R.id.textView1);
+        homeText.setText("Home");
+        //ImageView img= (ImageView) findViewById(R.id.image);
+        //img.setImageResource(R.drawable.run);
+
+
         //Toast.makeText(MainActivity.this,
          //       "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
 
@@ -105,19 +121,6 @@ public class MainActivity extends AppCompatActivity {
 //        CurrentCondition currentCond = new CurrentCondition(context);
 //        currentCond.getPollen(lat, lon);
     }
-
-    /*Does not work currently
-    public void setCurrentLat(View view) {
-        // Do something in response to button
-        Intent intent = getIntent();
-        String message = (String.valueOf(currentLocation.getAltitude()));
-
-        // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(message);
-
-
-    }*/
 
     //add the data sets to the pi
     private void addDataSet() {
@@ -189,127 +192,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //get the location permission before using the GPS
-    /*private void getLocationPermission(){
-        Log.d(TAG, "getLocationPermission: getting location permissions");
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                mLocationPermissionsGranted = true;
-
-                //permission is granted do something
-            }else{
-                ActivityCompat.requestPermissions(this,
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        }else{
-            ActivityCompat.requestPermissions(this,
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    //get the device location
-    private void getDeviceLocation(){
-        Log.d(TAG, "getDeviceLocation: getting the devices current location");
-
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        try{
-            if(mLocationPermissionsGranted){
-
-                final Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
-                            Log.d(TAG, "onComplete: found location!");
-                            currentLocation = (Location) task.getResult();
-
-
-                        }else{
-                            Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(MainActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        }catch (SecurityException e){
-            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
-        }
-    }
-    */
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private static final int RC_SIGN_IN = 123;
-
-    public void initFireBase() {
-        //TODO get firebase Connection
-        if (mDatabase == null) {
-            mDatabase = FirebaseDatabase.getInstance();
-            mDatabase.setPersistenceEnabled(true);
-        }
-    }
-
-//    public void ApiCall(){
-//
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        Log.i("API", "Call");
-//        String url = "http://api.wunderground.com/api/e3683e271666b131/conditions/q/CA/San_Francisco.json";
-//
-//        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>()
-//                {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject jsonRes = new JSONObject(response);
-//                            JSONObject jsonArray = new JSONObject(jsonRes.getString("current_observation"));
-//                            Log.i("getting Condition", jsonArray.getString("weather"));
-//                        } catch (JSONException e) {e.printStackTrace();};
-//
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // error
-//                        Log.d("security.error", error.toString());
-//                    }
-//                });
-//
-//        // Add the request to the RequestQueue.
-//        queue.add(postRequest);
-//
-//        return ;
-//    }
 }

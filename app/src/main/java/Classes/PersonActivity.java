@@ -126,6 +126,9 @@ public class PersonActivity {
                     //walking
                     activityArray[2] += Double.parseDouble(activitySet.getJSONObject(0).getString("walking"));
                 }
+                //activityArray[0]= activityArray[0] /60;
+                //activityArray[1] = activityArray[1] /60;
+                //activityArray[2] = activityArray[2] /60;
 
             }
             Log.i("Activity Array Bicycle", "" +activityArray[0]);
