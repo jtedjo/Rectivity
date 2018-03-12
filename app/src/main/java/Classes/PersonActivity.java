@@ -119,11 +119,11 @@ public class PersonActivity {
                     JSONObject daySegmentObject = dayObject.getJSONObject((String) dayKey);
                     JSONArray  activitySet = daySegmentObject.getJSONArray("activitySet");
                     //bicycle
-                    activityArray[0] += Double.parseDouble(activitySet.getJSONObject(0).getString("bicycle"));
+                    activityArray[0] += Double.parseDouble(activitySet.getJSONObject(0).getString("bicycle"))/60;
                     //running
-                    activityArray[1] += Double.parseDouble(activitySet.getJSONObject(0).getString("running"));
+                    activityArray[1] += Double.parseDouble(activitySet.getJSONObject(0).getString("running"))/60;
                     //walking
-                    activityArray[2] += Double.parseDouble(activitySet.getJSONObject(0).getString("walking"));
+                    activityArray[2] += Double.parseDouble(activitySet.getJSONObject(0).getString("walking"))/60;
                 }
                 //activityArray[0]= activityArray[0] /60;
                 //activityArray[1] = activityArray[1] /60;
