@@ -9,10 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.content.Intent;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import com.firebase.ui.auth.AuthUI;
 import com.github.mikephil.charting.charts.PieChart;
@@ -77,6 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Accessing Firebase
         initFireBase();
+
+        Spinner dropdown1 = findViewById(R.id.favorite_spinner1);
+        Spinner dropdown2 = findViewById(R.id.favorite_spinner2);
+        Spinner dropdown3 = findViewById(R.id.favorite_spinner3);
+        //create a list of items for the spinner.
+        String[] items = new String[]{"Walking", "Running", "Biking"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        //set the spinners adapter to the previously created one.
+        dropdown1.setAdapter(adapter);
+        dropdown2.setAdapter(adapter);
+        dropdown3.setAdapter(adapter);
 
         //chart onCreate
         Log.d(TAG, "onCreate: starting to create Pie Chart");
