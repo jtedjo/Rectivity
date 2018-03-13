@@ -188,8 +188,12 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
         newLatitude = location.getLatitude();
         newLongtitude = location.getLongitude();
         Log.i("new latitude is outputted", " " + newLatitude);
-        Intent intent = new Intent();
-        intent.setAction("LocationChangedRan"); mContext.sendBroadcast(intent);
+        Intent intent = new Intent("LOCATION_UPDATE");
+        intent.putExtra("lat", newLatitude);
+        intent.putExtra("lon", newLongtitude);
+        LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mContext);
+        manager.sendBroadcast(intent);
+//        intent.setAction("LocationChangedRan"); mContext.sendBroadcast(intent);
 
        // getPlaceInfo();
         Log.i("Lat in API", ""+newLatitude);
