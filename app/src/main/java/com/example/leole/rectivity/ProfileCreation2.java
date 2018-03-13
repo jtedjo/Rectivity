@@ -4,7 +4,10 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ProfileCreation2 extends AppCompatActivity {
 
@@ -24,5 +27,20 @@ public class ProfileCreation2 extends AppCompatActivity {
         dropdown1.setAdapter(adapter);
         dropdown2.setAdapter(adapter);
         dropdown3.setAdapter(adapter);
+
+        TextView favText1 = (TextView) findViewById(R.id.textView6);
+        favText1.setText("Select favorite activity");
+        TextView favText2 = (TextView) findViewById(R.id.textView7);
+        favText2.setText("Select second favorite activity");
+        TextView favText3 = (TextView) findViewById(R.id.textView8);
+        favText3.setText("Seclect third favorite activity");
+        TextView signupText = (TextView) findViewById(R.id.textView4);
+        signupText.setText("SignUp");
+        EditText weightText = (EditText) findViewById(R.id.editText8);
+        weightText.setText("Weight");
+        EditText goalText = (EditText) findViewById(R.id.editText9);
+        goalText.setText("Enter goal (minutes)");
+        Button p4_button = (Button)findViewById(R.id.button4);
+        p4_button.setText("Submit");
     }
 }

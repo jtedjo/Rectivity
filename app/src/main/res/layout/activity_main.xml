@@ -12,6 +12,7 @@
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginBottom="517dp"
+        android:layout_marginEnd="112dp"
         android:text="@string/textview"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"

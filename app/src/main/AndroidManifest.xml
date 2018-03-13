@@ -47,6 +47,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ProfileCreation">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
 
         <service
             android:name=".GoogleApiReceiver"
@@ -74,7 +84,6 @@
         <!-- </intent-filter> -->
         <!-- </receiver> -->
 
-        <activity android:name=".ProfileCreation" />
     </application>
 
 </manifest>
