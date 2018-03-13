@@ -9,7 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.content.Intent;
+
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 
 import com.firebase.ui.auth.AuthUI;
 import com.github.mikephil.charting.charts.PieChart;
@@ -68,12 +78,23 @@ public class MainActivity extends AppCompatActivity {
         Context context = getApplicationContext();
 
         //PersonActivity
-//        PersonActivity personAct = new PersonActivity(context);
-//        //TODO Do something with personActivity data
-//        yData = personAct.processSegment();
+
+        PersonActivity personAct = new PersonActivity(context);
+        yData = personAct.processSegment();
 
         //Accessing Firebase
         initFireBase();
+//        Spinner dropdown1 = findViewById(R.id.favorite_spinner1);
+//        Spinner dropdown2 = findViewById(R.id.favorite_spinner2);
+//        Spinner dropdown3 = findViewById(R.id.favorite_spinner3);
+//        //create a list of items for the spinner.
+//        String[] items = new String[]{"Walking", "Running", "Biking"};
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+//        //set the spinners adapter to the previously created one.
+//        dropdown1.setAdapter(adapter);
+//        dropdown2.setAdapter(adapter);
+//        dropdown3.setAdapter(adapter);
+
 
         //chart onCreate
         Log.d(TAG, "onCreate: starting to create Pie Chart");
@@ -103,6 +124,19 @@ public class MainActivity extends AppCompatActivity {
 //        double currentLat = currentLocation.getAltitude();
 //        double currentLong = currentLocation.getLongitude();
 
+        //UI Modification for Activity Main
+        Button p1_button = (Button)findViewById(R.id.button1);
+        p1_button.setText("Running");
+        Button p2_button = (Button)findViewById(R.id.button2);
+        p2_button.setText("Biking");
+        Button p3_button = (Button)findViewById(R.id.button3);
+        p3_button.setText("Swimming");
+        TextView homeText = (TextView) findViewById(R.id.textView1);
+        homeText.setText("Home");
+        //ImageView img= (ImageView) findViewById(R.id.image);
+        //img.setImageResource(R.drawable.run);
+
+
         //Toast.makeText(MainActivity.this,
          //       "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
 
@@ -113,19 +147,6 @@ public class MainActivity extends AppCompatActivity {
 //        CurrentCondition currentCond = new CurrentCondition(context);
 //        currentCond.getPollen(lat, lon);
     }
-
-    /*Does not work currently
-    public void setCurrentLat(View view) {
-        // Do something in response to button
-        Intent intent = getIntent();
-        String message = (String.valueOf(currentLocation.getAltitude()));
-
-        // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(message);
-
-
-    }*/
 
     //add the data sets to the pi
     private void addDataSet() {

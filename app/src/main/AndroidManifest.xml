@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,8 +24,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCGbc8Y2v9zEA_cR1B4RU7sEXeBt_ZZloA" />
 
+
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,6 +37,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ProfileCreation2">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
         <service
             android:name=".GoogleApiReceiver"
             android:enabled="true"
@@ -42,22 +56,25 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
-        <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-        <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
-        <!--<receiver android:name="MyReceiver">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="LocationChangedRan">-->
-
-                <!--</action>-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
+        <!-- <receiver android:name="MyReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="LocationChangedRan"> -->
 
 
+        <!-- </action> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+
+        <activity android:name=".ProfileCreation" />
     </application>
 
 </manifest>

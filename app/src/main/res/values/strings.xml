@@ -17,6 +17,9 @@
     <string name="age">TextView</string>
     <string name="height">TextView</string>
     <string name="next">Button</string>
+    <string name="weight">Textview</string>
+    <string name="Favorite_activity">TextView</string>
+
 
     <string name="title_activity_login">Sign in</string>
 
