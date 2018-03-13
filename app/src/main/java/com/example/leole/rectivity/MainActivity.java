@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         //PersonActivity
 //        PersonActivity personAct = new PersonActivity(context);
-        //TODO Do something with personActivity data
-        yData = personAct.processSegment();
+//        //TODO Do something with personActivity data
+//        yData = personAct.processSegment();
 
         //Accessing Firebase
         initFireBase();
