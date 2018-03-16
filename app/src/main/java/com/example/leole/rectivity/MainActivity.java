@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     public BroadcastReceiver broadcastReceiver;
     public LocalBroadcastManager localBroadcastManager;
+    public double latitude;
+    public double longtitude;
 
     //private Boolean mLocationPermissionsGranted = false;
     //private Location currentLocation;
@@ -120,6 +122,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.e(TAG, intent.getSerializableExtra("lat").toString() +", " +intent.getSerializableExtra("lon"));
+                latitude = intent.getDoubleExtra("lat", 0);
+                Log.i("current latitude in Main", "" + latitude );
+                longtitude = intent.getDoubleExtra("lon", 0);
+                Log.i("current longtitude in Main", "" + longtitude );
+
+                //get the pollen information?
+                CurrentCondition currentCond = new CurrentCondition(context);
+                currentCond.getPollen(latitude, longtitude);
+                currentCond.getWeather(latitude, longtitude);
+                Log.i("current pollen in Main", "" +currentCond );
+
             }
         };
 
@@ -135,13 +148,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("data","Notice me senpai!");
         sendBroadcast(intent);
 
-        double latitude = googleApiReceiver.newLatitude;
-        Log.i("current latitude in Main", "" + latitude );
+
 
         Log.i("Current Lat", ""+googleApiReceiver.newLatitude);
-
-//        double currentLat = currentLocation.getAltitude();
-//        double currentLong = currentLocation.getLongitude();
 
         //UI Modification for Activity Main
         Button p1_button = (Button)findViewById(R.id.button1);
@@ -152,12 +161,8 @@ public class MainActivity extends AppCompatActivity {
         p3_button.setText("Swimming");
         TextView homeText = (TextView) findViewById(R.id.textView1);
         homeText.setText("Home");
-        //ImageView img= (ImageView) findViewById(R.id.image);
-        //img.setImageResource(R.drawable.run);
 
 
-        //Toast.makeText(MainActivity.this,
-         //       "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
 
 
 
