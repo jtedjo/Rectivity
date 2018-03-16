@@ -65,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
             ACCESS_COARSE_LOCATION,
             INTERNET
     };
+    private double currentLat = 0;
+    private double currentLong = 0;
+
+
+    private static MainActivity instance;
+
 
     public BroadcastReceiver broadcastReceiver;
     public LocalBroadcastManager localBroadcastManager;
@@ -118,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
 //        getLocationPermission();
 //        getDeviceLocation();
 
+//        Intent intent = new Intent();
+//        intent.setAction("com.example.broadcast.MY_NOTIFICATION");
+//        intent.putExtra("data","Notice me senpai!");
+//        sendBroadcast(intent);
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -148,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("data","Notice me senpai!");
         sendBroadcast(intent);
 
+        currentLat = googleApiReceiver.newLatitude;
+        Log.i("current latitude in Main", "" + currentLat );
 
 
         Log.i("Current Lat", ""+googleApiReceiver.newLatitude);
@@ -216,9 +228,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
-      requestPermissions(); // Android 6.0 + (runtime permission)
-    else
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+//      requestPermissions(); // Android 6.0 + (runtime permission)
+//    else
       startGoogleApi();
 
     }
@@ -332,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
 
-    public void initFireBase() {
+    private void initFireBase() {
         //TODO get firebase Connection
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User").child("name");
@@ -357,6 +369,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public void updateLocation(double lat, double longLoc) {
+        currentLat = lat;
+        currentLong = longLoc;
     }
 //    public void ApiCall(){
 //
