@@ -1,8 +1,10 @@
 package com.example.leole.rectivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,5 +44,16 @@ public class ProfileCreation2 extends AppCompatActivity {
         goalText.setText("Enter goal (minutes)");
         Button p4_button = (Button)findViewById(R.id.button4);
         p4_button.setText("Submit");
+
+        p4_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(toMain);
+            }
+        });
+
+
     }
 }
