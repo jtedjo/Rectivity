@@ -96,9 +96,17 @@ public class CurrentCondition extends BroadcastReceiver {
 
                 String temp = jsonCurrenObs.getString("temperature");
                 String humidity = jsonCurrenObs.getString("humidity");
+                String dewPoint = jsonCurrenObs.getString("dewPoint");
+
+                comfortabilityIndex comfortabilityIndex =
+                        new comfortabilityIndex(Double.parseDouble(temp),Double.parseDouble(humidity));
+
+                 double comfortabilityLevel = comfortabilityIndex.humidex();
 
                 Log.i("temp",temp);
                 Log.i("humidity",humidity);
+                Log.i("dewpoint",humidity);
+                Log.i("level", String.valueOf(comfortabilityLevel));
 
 
             }
