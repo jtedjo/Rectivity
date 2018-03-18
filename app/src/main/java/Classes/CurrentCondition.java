@@ -93,19 +93,21 @@ public class CurrentCondition extends BroadcastReceiver {
 
 
 
+                //calculate score
 
                 String temp = jsonCurrenObs.getString("temperature");
                 String humidity = jsonCurrenObs.getString("humidity");
                 String dewPoint = jsonCurrenObs.getString("dewPoint");
 
                 comfortabilityIndex comfortabilityIndex =
-                        new comfortabilityIndex(Double.parseDouble(temp),Double.parseDouble(humidity));
+                        new comfortabilityIndex(Double.parseDouble(temp),Double.parseDouble(humidity)*100);
 
                  double comfortabilityLevel = comfortabilityIndex.humidex();
 
                 Log.i("temp",temp);
                 Log.i("humidity",humidity);
-                Log.i("dewpoint",humidity);
+                Log.i("dewpoint",dewPoint);
+
                 Log.i("level", String.valueOf(comfortabilityLevel));
 
 
@@ -123,7 +125,10 @@ public class CurrentCondition extends BroadcastReceiver {
             //TODO do something with Air Quality  info
 
 
+            JSONObject jsonAirObs = new JSONObject(currentObs);
+            String airQuality = jsonAirObs.getString("Air Quality");
 
+            Log.i("Air quality",airQuality);
             currentAir = currentObs;
 
         }
