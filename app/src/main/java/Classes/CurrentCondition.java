@@ -99,10 +99,6 @@ public class CurrentCondition extends BroadcastReceiver {
 
                 Log.i("temp",temp);
                 Log.i("humidity",humidity);
-                
-
-
-
 
 
             }
@@ -117,6 +113,7 @@ public class CurrentCondition extends BroadcastReceiver {
             Log.i("Air Quality", currentObs);
 
             //TODO do something with Air Quality  info
+
 
 
             currentAir = currentObs;
