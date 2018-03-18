@@ -12,6 +12,7 @@ public class Person implements Serializable {
 
     //Gender 0 = male 1 = Females
     private int gender;
+    private int age;
     private double height;
     private  double weight;
     private HashMap interests = new HashMap();
@@ -21,8 +22,12 @@ public class Person implements Serializable {
 
 
     public Person(){
-
-
+        //Default values for an example person
+        setAllergy(true);
+        setGender(0);
+        setHeight(180.0); //current unit is cm, but may change
+        setWeight(200.0); //current unit is pounds, but may change
+        setAge(30);
     }
 
     public boolean isAllergy() {
@@ -36,6 +41,8 @@ public class Person implements Serializable {
     public double getWeight() {
         return weight;
     }
+
+    public int getAge() { return age; }
 
     public void setName(String n) {
         name = n;
@@ -78,6 +85,8 @@ public class Person implements Serializable {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+
+    public void setAge(int age) { this.age = age; }
 
     @Override
     public String toString() {

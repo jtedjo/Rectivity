@@ -15,10 +15,10 @@ public class CustomListAdapter extends ArrayAdapter {
     //to reference the Activity
     private final Activity context;
 
-    //to store the list of countries
+    //to store the list of Activities
     private final String[] nameArray;
 
-    //to store the list of countries
+    //to store the score of each activity
     private final String[] infoArray;
 
     public CustomListAdapter(Activity context, String[] nameArrayParam, String[] infoArrayParam){
