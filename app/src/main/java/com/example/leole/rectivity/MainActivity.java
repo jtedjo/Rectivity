@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.content.Intent;
@@ -51,6 +52,13 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
+    //listview variables
+    String[] nameArray = {"Running", "Walking", "Biking"};
+    String[] infoArray = {
+            "Running",
+            "Walking",
+            "Biking"
+    };
 
     //charting variables
     private static String TAG = "MainActivity";
@@ -91,6 +99,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Context context = getApplicationContext();
+
+        //Listview for homepage
+        ListView listView;
+        CustomListAdapter List = new CustomListAdapter(this, nameArray, infoArray);
+        listView = (ListView) findViewById(R.id.listviewID);
+        listView.setAdapter(List);
 
         //PersonActivity
 
