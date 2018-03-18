@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 //        dropdown3.setAdapter(adapter);
 
         //example of comfortability index
-        comfortabilityIndex comfort = new comfortabilityIndex(28,55);
+        comfortabilityIndex comfort = new comfortabilityIndex(61,53);
         double currentComfortRating = comfort.humidex();
         Log.i("current comfort rating :", ""+ currentComfortRating);
 
