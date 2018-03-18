@@ -37,6 +37,7 @@ import java.util.List;
 import Classes.CurrentCondition;
 import Classes.Person;
 import Classes.PersonActivity;
+import Classes.comfortabilityIndex;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -108,6 +109,13 @@ public class MainActivity extends AppCompatActivity {
 //        dropdown1.setAdapter(adapter);
 //        dropdown2.setAdapter(adapter);
 //        dropdown3.setAdapter(adapter);
+
+        //example of comfortability index
+        comfortabilityIndex comfort = new comfortabilityIndex(28,55);
+        double currentComfortRating = comfort.humidex();
+        Log.i("current comfort rating :", ""+ currentComfortRating);
+
+
 
 
         //chart onCreate
