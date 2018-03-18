@@ -53,11 +53,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     //listview variables
-    String[] nameArray = {"Running", "Walking", "Biking"};
+    String[] nameArray = {"Running", "Walking", "Biking", "Swimming", "Gym", };
     String[] infoArray = {
             "Running",
             "Walking",
-            "Biking"
+            "Biking",
+            "Swimming",
+            "Gym"
     };
 
     //charting variables

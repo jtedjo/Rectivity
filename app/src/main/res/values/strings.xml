@@ -37,6 +37,8 @@
     </string>
     <string name="goal">TextView</string>
     <string name="submit">Button</string>
+    <string name="Activity_name">TextView</string>
+    <string name="Activity_info">TextView</string>
 
 
 </resources>

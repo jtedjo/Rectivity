@@ -13,7 +13,7 @@
             android:id="@+id/nameTextViewID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/Activity_name"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -21,7 +21,7 @@
             android:id="@+id/infoTextViewID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/Activity_info"
             android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>
