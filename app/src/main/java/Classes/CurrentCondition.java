@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.*;
 
+
 import com.android.volley.toolbox.*;
 
 import org.json.JSONException;
@@ -89,6 +90,27 @@ public class CurrentCondition extends BroadcastReceiver {
                 JSONObject jsonCurrenObs = new JSONObject(currentObs);
                 //TODO do something with summary weather info
                 Log.i("getting Condition", jsonCurrenObs.getString("summary"));
+
+
+
+                //calculate score
+
+                String temp = jsonCurrenObs.getString("temperature");
+                String humidity = jsonCurrenObs.getString("humidity");
+                String dewPoint = jsonCurrenObs.getString("dewPoint");
+
+                comfortabilityIndex comfortabilityIndex =
+                        new comfortabilityIndex(Double.parseDouble(temp),Double.parseDouble(humidity)*100);
+
+                 double comfortabilityLevel = comfortabilityIndex.humidex();
+
+                Log.i("temp",temp);
+                Log.i("humidity",humidity);
+                Log.i("dewpoint",dewPoint);
+
+                Log.i("level", String.valueOf(comfortabilityLevel));
+
+
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -99,7 +121,16 @@ public class CurrentCondition extends BroadcastReceiver {
         try {
             String currentObs  =  (new JSONObject(response)).getString("breezometer_aqi");
             Log.i("Air Quality", currentObs);
+
+            //TODO do something with Air Quality  info
+
+
+            JSONObject jsonAirObs = new JSONObject(currentObs);
+            String airQuality = jsonAirObs.getString("Air Quality");
+
+            Log.i("Air quality",airQuality);
             currentAir = currentObs;
+
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -108,5 +139,6 @@ public class CurrentCondition extends BroadcastReceiver {
 
     public void onReceive(Context con, Intent intent) {
         //TODO call the API for current weather.  Might want to be once every hour
+
     }
 };

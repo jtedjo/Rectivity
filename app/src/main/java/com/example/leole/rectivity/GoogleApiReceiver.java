@@ -62,8 +62,8 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
     protected GoogleApiClient mGoogleApiClient;
     protected Location mLastLocation;
 
-    public double newLatitude;
-    public double newLongtitude;
+    public double newLatitude =33.643364;
+    public double newLongtitude = -117.842441;
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */

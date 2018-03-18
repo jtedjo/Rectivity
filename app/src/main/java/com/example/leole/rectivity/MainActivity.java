@@ -38,6 +38,7 @@ import java.util.List;
 import Classes.CurrentCondition;
 import Classes.Person;
 import Classes.PersonActivity;
+import Classes.comfortabilityIndex;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     public BroadcastReceiver broadcastReceiver;
     public LocalBroadcastManager localBroadcastManager;
+    public CurrentCondition currentCond;
     public double latitude;
     public double longtitude;
 
@@ -122,6 +124,13 @@ public class MainActivity extends AppCompatActivity {
 //        dropdown2.setAdapter(adapter);
 //        dropdown3.setAdapter(adapter);
 
+        //example of comfortability index
+        comfortabilityIndex comfort = new comfortabilityIndex(28,55);
+        double currentComfortRating = comfort.humidex();
+        Log.i("current comfort rating :", ""+ currentComfortRating);
+
+
+
 
         //chart onCreate
         Log.d(TAG, "onCreate: starting to create Pie Chart");
@@ -142,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
 //        intent.setAction("com.example.broadcast.MY_NOTIFICATION");
 //        intent.putExtra("data","Notice me senpai!");
 //        sendBroadcast(intent);
+        longtitude= googleApiReceiver.newLongtitude;
+        latitude = googleApiReceiver.newLatitude;
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -172,11 +183,14 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("data","Notice me senpai!");
         sendBroadcast(intent);
 
-        currentLat = googleApiReceiver.newLatitude;
-        Log.i("current latitude in Main", "" + currentLat );
+        Log.i("current latitude in Main", "" + latitude );
+        Log.i("Current Longtitude in Main", ""+longtitude);
 
-
-        Log.i("Current Lat", ""+googleApiReceiver.newLatitude);
+        //get the pollen information?
+        currentCond = new CurrentCondition(context);
+        currentCond.getPollen(latitude, longtitude);
+        currentCond.getWeather(latitude, longtitude);
+        Log.i("current pollen in Main", "" +currentCond );
 
         //UI Modification for Activity Main
         Button p1_button = (Button)findViewById(R.id.button1);
