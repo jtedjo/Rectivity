@@ -22,6 +22,9 @@ import com.example.leole.rectivity.R;
  * Call to API to get conditions (Location, Weather, and Pollen)
  */
 
+
+
+
 public class CurrentCondition extends BroadcastReceiver {
     private Context context;
     String[] API = {"breeze", "weather"};
@@ -112,12 +115,17 @@ public class CurrentCondition extends BroadcastReceiver {
                 Log.i("dewpoint",dewPoint);
                 Log.i("weather conditions",weatherCond);
 
+                Log.i("comfortabilityIndex", String.valueOf(comfortabilityLevel));
 
+                 boolean goOutside = comfortabilityIndex.goOutside(weatherCond);
 
-                if(weatherCond == "rain"){
+                if(goOutside == true){
+                    
+                    Log.i("outside", "Yes");
                 }
-
-                Log.i("comfortabilityIndex:", String.valueOf(comfortabilityLevel));
+                else{
+                    Log.i("outside", "No");
+                }
 
 
             }

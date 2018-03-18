@@ -36,4 +36,11 @@ public class comfortabilityIndex {
         calculations = airTemperature+5/9*((6.112 *java.lang.Math.pow(10, superscript) * (relativeHumidity/100)) - 10);
         return calculations;
     }
+
+
+    public boolean goOutside(String icon){
+
+        return (icon == "rain")||(icon =="snow") ||(icon =="sleet") ? false : true;
+
+    }
 }
