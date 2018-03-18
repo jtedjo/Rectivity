@@ -16,10 +16,14 @@ import org.json.JSONObject;
 
 import static java.lang.System.*;
 
+import com.example.leole.rectivity.MainActivity;
 import com.example.leole.rectivity.R;
 /**
  * Call to API to get conditions (Location, Weather, and Pollen)
  */
+
+
+
 
 public class CurrentCondition extends BroadcastReceiver {
     private Context context;
@@ -93,11 +97,13 @@ public class CurrentCondition extends BroadcastReceiver {
 
 
 
-                //calculate score
+                //calculate comfort score
 
                 String temp = jsonCurrenObs.getString("temperature");
                 String humidity = jsonCurrenObs.getString("humidity");
                 String dewPoint = jsonCurrenObs.getString("dewPoint");
+                String weatherCond = jsonCurrenObs.getString("icon");
+
 
                 comfortabilityIndex comfortabilityIndex =
                         new comfortabilityIndex(Double.parseDouble(temp),Double.parseDouble(humidity)*100);
@@ -107,8 +113,19 @@ public class CurrentCondition extends BroadcastReceiver {
                 Log.i("temp",temp);
                 Log.i("humidity",humidity);
                 Log.i("dewpoint",dewPoint);
+                Log.i("weather conditions",weatherCond);
 
-                Log.i("level", String.valueOf(comfortabilityLevel));
+                Log.i("comfortabilityIndex", String.valueOf(comfortabilityLevel));
+
+                 boolean goOutside = comfortabilityIndex.goOutside(weatherCond);
+
+                if(goOutside == true){
+                    
+                    Log.i("outside", "Yes");
+                }
+                else{
+                    Log.i("outside", "No");
+                }
 
 
             }
@@ -139,6 +156,10 @@ public class CurrentCondition extends BroadcastReceiver {
 
     public void onReceive(Context con, Intent intent) {
         //TODO call the API for current weather.  Might want to be once every hour
+
+
+
+
 
     }
 };
