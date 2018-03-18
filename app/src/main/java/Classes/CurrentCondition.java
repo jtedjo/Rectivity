@@ -89,6 +89,9 @@ public class CurrentCondition extends BroadcastReceiver {
                 JSONObject jsonCurrenObs = new JSONObject(currentObs);
                 //TODO do something with summary weather info
                 Log.i("getting Condition", jsonCurrenObs.getString("summary"));
+
+
+
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -100,6 +103,7 @@ public class CurrentCondition extends BroadcastReceiver {
             String currentObs  =  (new JSONObject(response)).getString("breezometer_aqi");
             Log.i("Air Quality", currentObs);
             //TODO do something with Air Quality  info
+
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -108,5 +112,6 @@ public class CurrentCondition extends BroadcastReceiver {
 
     public void onReceive(Context con, Intent intent) {
         //TODO call the API for current weather.  Might want to be once every hour
+
     }
 };
