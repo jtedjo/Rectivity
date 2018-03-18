@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.*;
 
+
 import com.android.volley.toolbox.*;
 
 import org.json.JSONException;
@@ -89,6 +90,18 @@ public class CurrentCondition extends BroadcastReceiver {
                 JSONObject jsonCurrenObs = new JSONObject(currentObs);
                 //TODO do something with summary weather info
                 Log.i("getting Condition", jsonCurrenObs.getString("summary"));
+
+
+
+
+                String temp = jsonCurrenObs.getString("temperature");
+                String humidity = jsonCurrenObs.getString("humidity");
+
+                Log.i("temp",temp);
+                Log.i("humidity",humidity);
+                
+
+
 
 
 
