@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/signupTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="138dp"
@@ -18,7 +18,7 @@
         tools:text="SignUp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/firstNameTextBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="153dp"
@@ -26,15 +26,15 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:labelFor="@id/editText"
+        android:labelFor="@id/firstNameTextBox"
         android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/signupTxtView"
         tools:text="First Name" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/lastNameTextBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="153dp"
@@ -42,11 +42,11 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:labelFor="@id/editText2"
+        android:labelFor="@id/lastNameTextBox"
         android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/firstNameTextBox"
         tools:text="Last Name" />
 
     <EditText
@@ -62,7 +62,7 @@
         android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameTextBox"
         tools:text="Username" />
 
     <EditText
@@ -81,21 +81,21 @@
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
     <RadioButton
-        android:id="@+id/radioButton"
+        android:id="@+id/maleSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="46dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="15dp"
-        android:labelFor="@id/radioButton"
+        android:labelFor="@id/maleSelect"
         android:text="@string/gender"
-        app:layout_constraintEnd_toStartOf="@+id/radioButton2"
+        app:layout_constraintEnd_toStartOf="@+id/femaleSelect"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText4"
         tools:text="Male" />
 
     <RadioButton
-        android:id="@+id/radioButton2"
+        android:id="@+id/femaleSelect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="153dp"
@@ -106,7 +106,7 @@
         tools:text="Female" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/ageBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="153dp"
@@ -114,15 +114,15 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="number"
-        android:labelFor="@id/editText5"
+        android:labelFor="@id/ageBox"
         android:text="@string/age"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton"
+        app:layout_constraintTop_toBottomOf="@+id/maleSelect"
         tools:text="Age" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/HeightBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="153dp"
@@ -130,15 +130,15 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:labelFor="@id/editText6"
+        android:labelFor="@id/HeightBox"
         android:text="@string/height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/ageBox"
         tools:text="Height" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/nextBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="148dp"
@@ -146,7 +146,7 @@
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintTop_toBottomOf="@+id/HeightBox"
         tools:text="Next" />
 
 </android.support.constraint.ConstraintLayout>

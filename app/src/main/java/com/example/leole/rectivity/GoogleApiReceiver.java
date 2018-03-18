@@ -142,6 +142,7 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
      */
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
+        Log.i("createLocationRequest", mLocationRequest.toString());
 
         // Sets the desired interval for active location updates. This interval is
         // inexact. You may not receive updates at all if no location sources are available, or
@@ -188,13 +189,20 @@ public class GoogleApiReceiver implements GoogleApiClient.ConnectionCallbacks, G
         newLatitude = location.getLatitude();
         newLongtitude = location.getLongitude();
         Log.i("new latitude is outputted", " " + newLatitude);
-        Intent intent = new Intent();
-        intent.setAction("LocationChangedRan"); mContext.sendBroadcast(intent);
 
-       // getPlaceInfo();
+        Intent intent = new Intent("LOCATION_UPDATE");
+        intent.putExtra("lat", newLatitude);
+        intent.putExtra("lon", newLongtitude);
+        LocalBroadcastManager manager = LocalBroadcastManager.getInstance(mContext);
+        manager.sendBroadcast(intent);
+//        intent.setAction("LocationChangedRan"); mContext.sendBroadcast(intent);
+
+        // getPlaceInfo();
         Log.i("Lat in API", ""+newLatitude);
         Log.i("Long in API", ""+newLongtitude);
-        // getPlaceInfo();
+
+        intent.setAction("LocationChangedRan");
+        mContext.sendBroadcast(intent);
 
     }
 

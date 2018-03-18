@@ -1,10 +1,13 @@
 package com.example.leole.rectivity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -62,7 +65,17 @@ public class MainActivity extends AppCompatActivity {
             ACCESS_COARSE_LOCATION,
             INTERNET
     };
+    private double currentLat = 0;
+    private double currentLong = 0;
 
+
+    private static MainActivity instance;
+
+
+    public BroadcastReceiver broadcastReceiver;
+    public LocalBroadcastManager localBroadcastManager;
+    public double latitude;
+    public double longtitude;
 
     //private Boolean mLocationPermissionsGranted = false;
     //private Location currentLocation;
@@ -111,18 +124,45 @@ public class MainActivity extends AppCompatActivity {
 //        getLocationPermission();
 //        getDeviceLocation();
 
+//        Intent intent = new Intent();
+//        intent.setAction("com.example.broadcast.MY_NOTIFICATION");
+//        intent.putExtra("data","Notice me senpai!");
+//        sendBroadcast(intent);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.e(TAG, intent.getSerializableExtra("lat").toString() +", " +intent.getSerializableExtra("lon"));
+                latitude = intent.getDoubleExtra("lat", 0);
+                Log.i("current latitude in Main", "" + latitude );
+                longtitude = intent.getDoubleExtra("lon", 0);
+                Log.i("current longtitude in Main", "" + longtitude );
+
+                //get the pollen information?
+                CurrentCondition currentCond = new CurrentCondition(context);
+                currentCond.getPollen(latitude, longtitude);
+                currentCond.getWeather(latitude, longtitude);
+                Log.i("current pollen in Main", "" +currentCond );
+
+            }
+        };
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("LOCATION_UPDATE");
+
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+
+
         Intent intent = new Intent();
         intent.setAction("com.example.broadcast.MY_NOTIFICATION");
         intent.putExtra("data","Notice me senpai!");
         sendBroadcast(intent);
 
-        double latitude = googleApiReceiver.newLatitude;
-        Log.i("current latitude in Main", "" + latitude );
+        currentLat = googleApiReceiver.newLatitude;
+        Log.i("current latitude in Main", "" + currentLat );
+
 
         Log.i("Current Lat", ""+googleApiReceiver.newLatitude);
-
-//        double currentLat = currentLocation.getAltitude();
-//        double currentLong = currentLocation.getLongitude();
 
         //UI Modification for Activity Main
         Button p1_button = (Button)findViewById(R.id.button1);
@@ -133,12 +173,8 @@ public class MainActivity extends AppCompatActivity {
         p3_button.setText("Swimming");
         TextView homeText = (TextView) findViewById(R.id.textView1);
         homeText.setText("Home");
-        //ImageView img= (ImageView) findViewById(R.id.image);
-        //img.setImageResource(R.drawable.run);
 
 
-        //Toast.makeText(MainActivity.this,
-         //       "Current Latitude : " +latitude, Toast.LENGTH_LONG).show();
 
 
 
@@ -147,6 +183,14 @@ public class MainActivity extends AppCompatActivity {
 //        CurrentCondition currentCond = new CurrentCondition(context);
 //        currentCond.getPollen(lat, lon);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        localBroadcastManager.unregisterReceiver(broadcastReceiver);
+    }
+
 
     //add the data sets to the pi
     private void addDataSet() {
@@ -184,9 +228,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
-      requestPermissions(); // Android 6.0 + (runtime permission)
-    else
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+//      requestPermissions(); // Android 6.0 + (runtime permission)
+//    else
       startGoogleApi();
 
     }
@@ -300,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
 
-    public void initFireBase() {
+    private void initFireBase() {
         //TODO get firebase Connection
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("User").child("name");
@@ -325,6 +369,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public void updateLocation(double lat, double longLoc) {
+        currentLat = lat;
+        currentLong = longLoc;
     }
 //    public void ApiCall(){
 //
