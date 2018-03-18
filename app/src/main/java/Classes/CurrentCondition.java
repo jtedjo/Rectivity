@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.*;
 
+
 import com.android.volley.toolbox.*;
 
 import org.json.JSONException;
@@ -89,6 +90,17 @@ public class CurrentCondition extends BroadcastReceiver {
                 JSONObject jsonCurrenObs = new JSONObject(currentObs);
                 //TODO do something with summary weather info
                 Log.i("getting Condition", jsonCurrenObs.getString("summary"));
+
+
+
+
+                String temp = jsonCurrenObs.getString("temperature");
+                String humidity = jsonCurrenObs.getString("humidity");
+
+                Log.i("temp",temp);
+                Log.i("humidity",humidity);
+
+
             }
             catch (JSONException e) {
                 e.printStackTrace();
@@ -99,7 +111,13 @@ public class CurrentCondition extends BroadcastReceiver {
         try {
             String currentObs  =  (new JSONObject(response)).getString("breezometer_aqi");
             Log.i("Air Quality", currentObs);
+
+            //TODO do something with Air Quality  info
+
+
+
             currentAir = currentObs;
+
         }
         catch (JSONException e) {
             e.printStackTrace();
@@ -108,5 +126,6 @@ public class CurrentCondition extends BroadcastReceiver {
 
     public void onReceive(Context con, Intent intent) {
         //TODO call the API for current weather.  Might want to be once every hour
+
     }
 };
