@@ -19,8 +19,12 @@ public class comfortabilityIndex {
 
     private double airTemperature;
     private double relativeHumidity;
+    private boolean allergicCondition;
 
+
+    //since API uses fahrenheit as output, instantly convert with the constructor
     public comfortabilityIndex(double temperature, double humidity){
+        double tempInCelsius = (temperature - 32) * 5/9;
         airTemperature = temperature;
         relativeHumidity = humidity;
 
