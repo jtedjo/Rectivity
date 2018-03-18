@@ -23,7 +23,7 @@ import com.example.leole.rectivity.R;
 public class CurrentCondition extends BroadcastReceiver {
     private Context context;
     String[] API = {"breeze", "weather"};
-
+    private String currentAir;
 
     public CurrentCondition(Context c ){
         this.context = c;
@@ -99,7 +99,7 @@ public class CurrentCondition extends BroadcastReceiver {
         try {
             String currentObs  =  (new JSONObject(response)).getString("breezometer_aqi");
             Log.i("Air Quality", currentObs);
-            //TODO do something with Air Quality  info
+            currentAir = currentObs;
         }
         catch (JSONException e) {
             e.printStackTrace();
