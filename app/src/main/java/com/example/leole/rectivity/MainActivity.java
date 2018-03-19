@@ -102,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Context context = getApplicationContext();
 
+        Person person1 = new Person();
+
+        TextView nameText = (TextView) findViewById(R.id.textView5);
+        nameText.setText(person1.getName());
+
         //Listview for homepage
         ListView listView;
         CustomListAdapter List = new CustomListAdapter(this, nameArray, infoArray);
