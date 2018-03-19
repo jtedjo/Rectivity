@@ -18,17 +18,17 @@ public class ProfileCreation extends AppCompatActivity {
 
         TextView headerText = (TextView) findViewById(R.id.signupTxtView);
         headerText.setText("SignUp");
-        EditText firstText = (EditText) findViewById(R.id.firstNameTextBox);
+        final EditText firstText = (EditText) findViewById(R.id.firstNameTextBox);
         firstText.setText("First Name");
-        EditText lastText = (EditText) findViewById(R.id.lastNameTextBox);
+        final EditText lastText = (EditText) findViewById(R.id.lastNameTextBox);
         lastText.setText("Last Name");
-        EditText userText = (EditText) findViewById(R.id.editText3);
+        final EditText userText = (EditText) findViewById(R.id.editText3);
         userText.setHint("Username");
-        EditText passwordText = (EditText) findViewById(R.id.editText4);
+        final EditText passwordText = (EditText) findViewById(R.id.editText4);
         passwordText.setHint("Password");
-        EditText ageText = (EditText) findViewById(R.id.ageBox);
+        final EditText ageText = (EditText) findViewById(R.id.ageBox);
         ageText.setText("Age");
-        EditText heightText = (EditText) findViewById(R.id.HeightBox);
+        final EditText heightText = (EditText) findViewById(R.id.HeightBox);
         heightText.setText("Height");
         RadioButton male_button = (RadioButton)findViewById(R.id.maleSelect);
         male_button.setText("Male");
@@ -43,7 +43,16 @@ public class ProfileCreation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goTonext = new Intent(getApplicationContext() , ProfileCreation2.class);
-
+                String firstName =firstText.getText().toString();
+                goTonext.putExtra("first name", firstName);
+                String lastName = lastText.getText().toString();
+                goTonext.putExtra("last name", lastName);
+                String userName = userText.getText().toString();
+                goTonext.putExtra("user name", userName);
+                String age = ageText.getText().toString();
+                goTonext.putExtra("age", age);
+                String height = heightText.getText().toString();
+                goTonext.putExtra("height", height);
                 startActivity(goTonext);
             }
         });

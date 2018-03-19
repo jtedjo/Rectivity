@@ -31,10 +31,11 @@
         android:layout_marginBottom="219dp"
         android:layout_marginEnd="41dp"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="350dp"
         android:text="@string/running"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="running" />
@@ -58,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="219dp"
         android:layout_marginEnd="19dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="350dp"
         android:text="@string/swimming"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,11 +101,11 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/idPieChart"
         android:layout_width="159dp"
-        android:layout_height="223dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="64dp"></com.github.mikephil.charting.charts.PieChart>
+        app:layout_constraintRight_toRightOf="parent"></com.github.mikephil.charting.charts.PieChart>
 
     <TextView
         android:id="@+id/textView5"
@@ -123,7 +124,7 @@
 
     <ListView
         android:id="@+id/listviewID"
-        android:layout_width="386dp"
+        android:layout_width="0dp"
         android:layout_height="153dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

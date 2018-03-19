@@ -179,6 +179,12 @@ public class MainActivity extends AppCompatActivity {
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         localBroadcastManager.registerReceiver(broadcastReceiver, intentFilter);
 
+        Bundle bundles = getIntent().getExtras();
+
+        String firstName = bundles.getString("first name");
+        Log.i("first name transferred ", ""+firstName);
+        String lastName = bundles.getString("last name");
+        Log.i("last name transferred ", ""+lastName);
 
         Intent intent = new Intent();
         intent.setAction("com.example.broadcast.MY_NOTIFICATION");

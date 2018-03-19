@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,11 +46,24 @@ public class ProfileCreation2 extends AppCompatActivity {
         Button p4_button = (Button)findViewById(R.id.button4);
         p4_button.setText("Submit");
 
+        //Bundle bundles = getIntent().getExtras();
+
+        //final String firstName = bundles.getString("first name");
+        //Log.i("first name transferred ", ""+firstName);
+        //final String lastName = bundles.getString("last name");
+        //Log.i("last name transferred ", ""+lastName);
+
+        final Intent mLaunchIntent = getIntent();
         p4_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent toMain = new Intent(getApplicationContext(), MainActivity.class);
+                //toMain.putExtra(Intent.EXTRA_INTENT, mLaunchIntent);
+                Bundle bundles = getIntent().getExtras();
+                String firstName = bundles.getString("first name");
+                Log.i("first name in profileCreation 2", ""+firstName);
+                toMain.putExtra("first name", firstName);
                 startActivity(toMain);
             }
         });
