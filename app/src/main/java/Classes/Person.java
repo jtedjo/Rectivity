@@ -28,6 +28,16 @@ public class Person implements Serializable {
         setHeight(180.0); //current unit is cm, but may change
         setWeight(200.0); //current unit is pounds, but may change
         setAge(30);
+        setName("John Doe");
+    }
+
+    public void setAll(boolean Allergy, int Gender, double Height, double Weight, int Age, String Name){
+        setAllergy(Allergy);
+        setGender(Gender);
+        setHeight(Height);
+        setWeight(Weight);
+        setAge(Age);
+        setName(Name);
     }
 
     public boolean isAllergy() {
