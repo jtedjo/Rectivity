@@ -102,7 +102,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Context context = getApplicationContext();
 
+        Bundle bundles = getIntent().getExtras();
+
+        String firstName = bundles.getString("first name");
+        String lastName = bundles.getString("last name");
+        String userName = bundles.getString("user name");
+        String age = bundles.getString( "age");
+        String height = bundles.getString("height");
+
+
         Person person1 = new Person();
+        person1.setAge(Integer.parseInt(age));
+        Log.i("age in Main", "" + age );
+        person1.setHeight(Double.parseDouble(height));
+        person1.setName(firstName + " "+ lastName);
 
         TextView nameText = (TextView) findViewById(R.id.textView5);
         nameText.setText(person1.getName());
@@ -184,12 +197,6 @@ public class MainActivity extends AppCompatActivity {
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         localBroadcastManager.registerReceiver(broadcastReceiver, intentFilter);
 
-        Bundle bundles = getIntent().getExtras();
-
-        String firstName = bundles.getString("first name");
-        Log.i("first name transferred ", ""+firstName);
-        String lastName = bundles.getString("last name");
-        Log.i("last name transferred ", ""+lastName);
 
         Intent intent = new Intent();
         intent.setAction("com.example.broadcast.MY_NOTIFICATION");
@@ -218,11 +225,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-//        double lat = 33.7486097;
-//        double lon = -117.9776172;
-//        CurrentCondition currentCond = new CurrentCondition(context);
-//        currentCond.getPollen(lat, lon);
     }
 
     @Override

@@ -46,12 +46,6 @@ public class ProfileCreation2 extends AppCompatActivity {
         Button p4_button = (Button)findViewById(R.id.button4);
         p4_button.setText("Submit");
 
-        //Bundle bundles = getIntent().getExtras();
-
-        //final String firstName = bundles.getString("first name");
-        //Log.i("first name transferred ", ""+firstName);
-        //final String lastName = bundles.getString("last name");
-        //Log.i("last name transferred ", ""+lastName);
 
         final Intent mLaunchIntent = getIntent();
         p4_button.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +56,18 @@ public class ProfileCreation2 extends AppCompatActivity {
                 //toMain.putExtra(Intent.EXTRA_INTENT, mLaunchIntent);
                 Bundle bundles = getIntent().getExtras();
                 String firstName = bundles.getString("first name");
+                String lastName = bundles.getString("last name");
+                String userName = bundles.getString("user name");
+                String age = bundles.getString( "age");
+                String height = bundles.getString("height");
+
                 Log.i("first name in profileCreation 2", ""+firstName);
+
                 toMain.putExtra("first name", firstName);
+                toMain.putExtra("last name", lastName);
+                toMain.putExtra("user name", userName);
+                toMain.putExtra("age", age);
+                toMain.putExtra("height", height);
                 startActivity(toMain);
             }
         });
